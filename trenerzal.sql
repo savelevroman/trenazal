@@ -1,0 +1,190 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Хост: 127.0.0.1:3306
+-- Время создания: Сен 20 2024 г., 12:15
+-- Версия сервера: 5.7.39
+-- Версия PHP: 8.1.9
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- База данных: `trenerzal`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `clients`
+--
+
+CREATE TABLE `clients` (
+  `id_client` int(11) NOT NULL,
+  `fio_client` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `phone_client` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `clients`
+--
+
+INSERT INTO `clients` (`id_client`, `fio_client`, `birthday`, `phone_client`) VALUES
+(1, 'Краснов Андрей Глебович', '2001-05-16', '+79039872336');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE `users` (
+  `id_user` int(11) NOT NULL,
+  `fio` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `login` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id_user`, `fio`, `email`, `phone`, `login`, `password`, `role`) VALUES
+(1, 'Иванов Иван Иванович', 'aaaa@yandex.ru', '89518406953', 'aaa', '123', 1),
+(2, 'Петров Петр Петрович', 'bbbb@yandex.ru', '89085123141', 'bbb', '456', 2),
+(3, 'Сидоров Олег Кириллович', 'сссс@yandex.ru', '89518406953', 'ссс', '789', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `uslugi`
+--
+
+CREATE TABLE `uslugi` (
+  `id_uslugi` int(11) NOT NULL,
+  `name_uslugi` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price_usluigi` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `uslugi`
+--
+
+INSERT INTO `uslugi` (`id_uslugi`, `name_uslugi`, `price_usluigi`) VALUES
+(1, 'Тренировка', '4000.00'),
+(2, 'Массаж', '1500.00'),
+(3, 'Сауна', '500.00'),
+(4, 'Тренировка с тренером', '6000.00');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `zapis`
+--
+
+CREATE TABLE `zapis` (
+  `id_zapis` int(11) NOT NULL,
+  `id_uslugi` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_client` int(11) NOT NULL,
+  `vremya_zapis` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `zapis`
+--
+
+INSERT INTO `zapis` (`id_zapis`, `id_uslugi`, `id_user`, `id_client`, `vremya_zapis`) VALUES
+(1, 1, 3, 1, '2024-09-01 12:00:00'),
+(2, 3, 3, 1, '2024-09-01 14:00:00'),
+(3, 4, 3, 1, '2024-09-19 17:00:00'),
+(4, 4, 3, 1, '2024-09-15 17:00:00'),
+(5, 4, 3, 1, '2024-09-11 17:00:00');
+
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`id_client`);
+
+--
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- Индексы таблицы `uslugi`
+--
+ALTER TABLE `uslugi`
+  ADD PRIMARY KEY (`id_uslugi`);
+
+--
+-- Индексы таблицы `zapis`
+--
+ALTER TABLE `zapis`
+  ADD PRIMARY KEY (`id_zapis`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_client` (`id_client`),
+  ADD KEY `id_uslugi` (`id_uslugi`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT для таблицы `uslugi`
+--
+ALTER TABLE `uslugi`
+  MODIFY `id_uslugi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `zapis`
+--
+ALTER TABLE `zapis`
+  MODIFY `id_zapis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `zapis`
+--
+ALTER TABLE `zapis`
+  ADD CONSTRAINT `zapis_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `zapis_ibfk_2` FOREIGN KEY (`id_client`) REFERENCES `clients` (`id_client`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `zapis_ibfk_3` FOREIGN KEY (`id_uslugi`) REFERENCES `uslugi` (`id_uslugi`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
