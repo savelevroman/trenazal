@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 21 2024 г., 12:23
+-- Время создания: Сен 21 2024 г., 20:45
 -- Версия сервера: 5.7.39
 -- Версия PHP: 8.0.22
 
@@ -29,22 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `clients` (
   `id_client` int(11) NOT NULL,
-  `fio_client` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `phone_client` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `fio_client` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `clients`
 --
 
-INSERT INTO `clients` (`id_client`, `fio_client`, `birthday`, `phone_client`) VALUES
-(1, 'Краснов Андрей Глебович', '2001-05-16', '89039872336'),
-(2, 'Ковалев Алексей Александрович', '2002-08-20', '89895097573'),
-(3, 'Глущенко Мария Геннадьевна', '2002-09-21', '89524130595'),
-(4, 'Тимофеев Роман Евгеньевич', '2005-06-10', '89895282656'),
-(5, 'Костеева Полина Николаевна', '2004-08-20', '89547345687'),
-(6, 'Гройман Дарья Александровна', '2007-09-07', '89534445608');
+INSERT INTO `clients` (`id_client`, `fio_client`) VALUES
+(1, 'Краснов Александр Альбертович'),
+(2, 'Ковалев Григорий Иванович'),
+(3, 'Глущенко Ульяна Петровна'),
+(4, 'Тимофеев Валерий Ильич'),
+(5, 'Костеева Полина Николаевна'),
+(6, 'Гройман Дарья Александровна');
 
 -- --------------------------------------------------------
 
@@ -59,7 +57,7 @@ CREATE TABLE `users` (
   `phone` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `login` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` int(11) NOT NULL
+  `role` int(11) NOT NULL DEFAULT '3'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
