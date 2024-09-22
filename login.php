@@ -11,7 +11,7 @@ if (!empty($_POST)) {
     $sql = "SELECT * FROM users WHERE login = '$login' AND password ='$password'";
     $result=$mysqli->query($sql);
     $user=mysqli_fetch_assoc($result);
-        
+    var_dump($sql);  
     if (!empty($user)) {
     session_start();
     $_SESSION['id_user'] = $user['id_user'];
@@ -19,10 +19,13 @@ if (!empty($_POST)) {
     $_SESSION['fio'] = $user['fio'];
     $_SESSION['role'] = $user['role'];
     if ($_SESSION['role'] == 1){
-        header ("Location: mycab.php");
+        header ("Location: director.php");
     } 
     elseif ($_SESSION['role'] == 2) {
         header ("Location: registrator.php");
+    }
+    else{
+      header ("Location: trener.php");
     }
 }
     else {
@@ -49,7 +52,7 @@ if (!empty($_POST)) {
     <input type="password" class="form-control" required id="password" name="password">
     <br>
   </div>
-  <button type="submit" class="btn btn-primary">Отправить</button>
+  <button type="submit" class="btn btn-primary">Войти</button>
 </form>
 </div>
         <div class="col-3"></div>

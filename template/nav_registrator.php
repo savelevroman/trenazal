@@ -10,11 +10,11 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">
-        <a class="nav-link" href="login.php">Войти</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="reg.php">Зарегистрироваться</a>
-      </li>
+          <a class="nav-link" href="registrator.php">Отчеты регистратора</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="logout.php">Выход</a>
+        </li>
       </ul>
     </div>
   </div>
